@@ -1,13 +1,21 @@
-import { createStore, Store } from 'redux'
-import { incrementadorAction } from './contador/contador.actions';
+
+import { Store, createStore } from 'redux';
 import { contadorReducer } from './contador/contador.reducer';
+import { incrementadorAction } from './contador/contador.actions';
 
-const store: Store = createStore(contadorReducer);
+const store: Store = createStore( contadorReducer );
 
-store.subscribe(()=>{
-    console.log("Subs:", store.getState())
+store.subscribe( () => {
+
+    console.log('Subs:', store.getState() );
+
 });
 
-store.dispatch(incrementadorAction);
-store.dispatch(incrementadorAction);
 
+
+store.dispatch( incrementadorAction );
+store.dispatch( incrementadorAction );
+store.dispatch( incrementadorAction );
+store.dispatch( incrementadorAction );
+store.dispatch( incrementadorAction );
+store.dispatch( incrementadorAction );
