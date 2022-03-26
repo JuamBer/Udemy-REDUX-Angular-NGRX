@@ -17,7 +17,7 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     BrowserModule,
     TodoModule,
-    StoreModule.forRoot({ todos: todoReducer })]
+    StoreModule.forRoot({ todos: todoReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
