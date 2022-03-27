@@ -8,6 +8,7 @@ import { TodoFooterComponent } from './todo-footer/todo-footer.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoPageComponent } from './todo-page/todo-page.component';
+import { TodoFilterPipe } from './pipes/todo-filter.pipe';
 
 
 
@@ -17,7 +18,8 @@ import { TodoPageComponent } from './todo-page/todo-page.component';
     TodoFooterComponent,
     TodoItemComponent,
     TodoListComponent,
-    TodoPageComponent
+    TodoPageComponent,
+    TodoFilterPipe
   ],
   imports: [
     CommonModule,

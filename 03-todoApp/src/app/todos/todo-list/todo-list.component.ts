@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 //NGRX
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/state/app.reducer';
+import { FiltersType } from 'src/app/filter/state/filter.type';
+import { AppState } from 'src/app/state/app.state';
 
 import { Todo } from '../models/todo.model';
 
@@ -14,14 +15,16 @@ import { Todo } from '../models/todo.model';
 export class TodoListComponent implements OnInit {
 
   todos: Todo[] = [];
+  actualFilter: FiltersType = 'todos';
 
   constructor(
     private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
-    this.store.select('todos').subscribe((todos)=>{
-      this.todos = todos;
+    this.store.subscribe((state)=>{
+      this.todos = state.todos;
+      this.actualFilter = state.filter;
     })
   }
 

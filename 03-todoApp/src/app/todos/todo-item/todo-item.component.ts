@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 
 //NGRX
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/state/app.reducer';
+import { AppState } from 'src/app/state/app.state';
 import * as todoActions from '../state/todo.actions';
 
 import { Todo } from '../models/todo.model';

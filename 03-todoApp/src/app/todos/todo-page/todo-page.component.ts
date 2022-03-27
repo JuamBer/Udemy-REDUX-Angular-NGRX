@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 //NGRX
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/state/app.reducer';
+import { AppState } from 'src/app/state/app.state';
 import * as todoActions from '../state/todo.actions';
 
 @Component({

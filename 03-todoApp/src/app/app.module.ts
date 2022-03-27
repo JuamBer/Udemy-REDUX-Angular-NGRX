@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { TodoModule } from './todos/todo.module';
 import { FooterComponent } from './footer/footer.component';
 import { environment } from 'src/environments/environment';
-import { appReducers } from './state/app.reducer';
+import { appReducers } from './state/app.reducers';
 
 @NgModule({
   declarations: [
