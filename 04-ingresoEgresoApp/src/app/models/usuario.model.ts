@@ -12,4 +12,9 @@ export class Usuario {
     this.nombre = nombre;
     this.email = email;
   }
+
+  static fromFirebase({ email, nombre, uid}){
+    return new Usuario(uid, nombre, email);
+  }
 }
+

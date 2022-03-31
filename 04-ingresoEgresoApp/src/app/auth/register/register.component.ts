@@ -1,22 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import Swal from 'sweetalert2';
+
+//NGRX
+import { AppState } from 'src/app/app.reducer';
+import { Store } from '@ngrx/store';
+import * as uiActions from 'src/app/shared/ui.actions';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styles: []
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit,OnDestroy {
 
   registroForm: FormGroup;
+  loading: boolean = false;
+  uiSuscription: Subscription
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -25,43 +33,29 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+
+    this.uiSuscription = this.store.select('ui').subscribe(ui => this.loading = ui.isLoading);
+  }
+  ngOnDestroy(): void {
+    this.uiSuscription.unsubscribe();
   }
 
-  crearUsuario(){
-    console.log("crearUsuario()\n" + this.registroForm.value)
+  crearUsuario() {
+    this.store.dispatch(uiActions.isLoading());
 
-    Swal.fire({
-      title: 'Validando Credenciales',
-      didOpen: () => {
-        Swal.showLoading()
-      }
-    })
-
-    if(this.registroForm.valid){
-      const { nombre, email, password } = this.registroForm.value;
-      this.authService.crearUsuario(nombre, email, password)
+    const { nombre, email, password } = this.registroForm.value;
+    this.authService.crearUsuario(nombre, email, password)
       .then(
-        (credenciales)=>{
-          console.log(credenciales);
-          Swal.close();
+        (credenciales) => {
+          this.store.dispatch(uiActions.stopLoading());
           this.router.navigate(['/']);
         }
       ).catch(
-        (error)=>{
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: error.message,
-          });
+        (error) => {
+          this.store.dispatch(uiActions.stopLoading());
         }
       )
-    }else{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Credenciales Inválidas',
-      })
-    }
+
   }
 
 }

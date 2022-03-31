@@ -1,22 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import Swal from 'sweetalert2'
+import { Subscription } from 'rxjs';
+
+//NGRX
+import { AppState } from 'src/app/app.reducer';
+import { Store } from '@ngrx/store';
+import * as uiActions from 'src/app/shared/ui.actions';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styles: []
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm: FormGroup;
+  loading: boolean = false;
+  uiSuscription: Subscription
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -24,43 +33,30 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     })
+
+    this.uiSuscription = this.store.select('ui').subscribe(ui => this.loading = ui.isLoading);
+  }
+  ngOnDestroy(): void {
+    this.uiSuscription.unsubscribe();
   }
 
+
   loginUsuario() {
-    console.log("loginUsuario()\n" + this.loginForm.value)
+    this.store.dispatch(uiActions.isLoading());
 
-    Swal.fire({
-      title: 'Validando Credenciales',
-      didOpen: () => {
-        Swal.showLoading()
-      }
-    })
+    const { email, password } = this.loginForm.value;
+    this.authService.loginUsuario(email, password)
+      .then(
+        (credenciales) => {
+          this.store.dispatch(uiActions.stopLoading());
+          this.router.navigate(['/']);
+        }
+      ).catch(
+        (error) => {
+          this.store.dispatch(uiActions.stopLoading());
+        }
+      )
 
-    if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      this.authService.loginUsuario(email, password)
-        .then(
-          (credenciales) => {
-            console.log(credenciales);
-            Swal.close();
-            this.router.navigate(['/']);
-          }
-        ).catch(
-          (error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: error.message,
-            });
-          }
-        )
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Credenciales Inválidas',
-      })
-    }
   }
 
 }
