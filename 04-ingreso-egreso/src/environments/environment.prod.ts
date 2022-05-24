@@ -1,12 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: 'AIzaSyBxK6eNwHoAKYBGDW3cUlhLaGytNIOiWcs',
-    authDomain: 'ingreso-egreso-app.firebaseapp.com',
-    databaseURL: 'https://ingreso-egreso-app.firebaseio.com',
-    projectId: 'ingreso-egreso-app',
-    storageBucket: 'ingreso-egreso-app.appspot.com',
-    messagingSenderId: '577324738477',
-    appId: '1:577324738477:web:e35aca0665073e12d02324'
+    apiKey: "AIzaSyA0K932jV8nFfhVWkzKUehXUqZBtPW9dP8",
+    authDomain: "ingreso-egreso-app-1d633.firebaseapp.com",
+    projectId: "ingreso-egreso-app-1d633",
+    storageBucket: "ingreso-egreso-app-1d633.appspot.com",
+    messagingSenderId: "359178306335",
+    appId: "1:359178306335:web:f9cb6b204f1b468e16e62a"
   }
 };
