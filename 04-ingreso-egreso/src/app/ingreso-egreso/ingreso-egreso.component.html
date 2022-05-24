@@ -39,9 +39,14 @@
               </div>
 
               <hr>
-              <button type="submit" class="btn btn-success mr-2">
+              <button type="submit" [disabled]="form.invalid" class="btn btn-success mr-2" *ngIf="!cargando">
                 <i class="fa fa-save"></i>
                 Agregar
+              </button>
+
+              <button type="submit" [disabled]="true" class="btn btn-success mr-2" *ngIf="cargando">
+                <i class="fa fa-spin fa-sync"></i>
+                Espere...
               </button>
 
               <!--
