@@ -19,4 +19,13 @@ export class IngresoEgresoService {
       .collection('items')
       .add({...ingresoEgreso})
   }
+
+  initIngresosEgresosListener(uid: string){
+    return this.firestore.collection(`${uid}/ingresos-egresos/items`).valueChanges({ idField: 'uid' });
+  }
+
+  borrarIngresoEgreso(id: string){
+    const uid: string = this.authService.user.uid;
+    return this.firestore.doc(`${uid}/ingresos-egresos/items/${id}`).delete();
+  }
 }
