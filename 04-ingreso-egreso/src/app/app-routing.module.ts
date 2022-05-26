@@ -15,10 +15,9 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     {
-        path: '',
-        component: DashboardComponent,
-        children: dashboardRoutes,
-        canActivate: [ AuthGuard ]
+      path: '',
+      loadChildren: () => import('./ingreso-egreso/ingreso-egreso.module').then(m => m.IngresoEgresoModule),
+      canLoad: [AuthGuard]
     },
     { path: '**', redirectTo: '' }
 ];

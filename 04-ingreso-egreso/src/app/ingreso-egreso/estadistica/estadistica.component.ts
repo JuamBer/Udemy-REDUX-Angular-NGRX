@@ -7,6 +7,7 @@ import { IngresoEgresoService } from 'src/app/services/ingreso-egreso.service';
 import Swal from 'sweetalert2';
 import { ChartType } from 'chart.js';
 import { MultiDataSet, Label } from 'ng2-charts';
+import { IngresoEgresoAppState } from '../state/ingreso-egreso.reducer';
 @Component({
   selector: 'app-estadistica',
   templateUrl: './estadistica.component.html',
@@ -29,7 +30,7 @@ export class EstadisticaComponent implements OnInit,OnDestroy {
   subscriptions: Subscription[] = [];
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<IngresoEgresoAppState>,
     private ingresoEgresoService: IngresoEgresoService
   ) { }
 

@@ -7,6 +7,7 @@ import { AppState } from '../app.reducer';
 import { IngresoEgreso } from '../models/ingreso-egreso.model';
 import { IngresoEgresoService } from '../services/ingreso-egreso.service';
 import * as ui from '../shared/ui.actions';
+import { IngresoEgresoAppState } from './state/ingreso-egreso.reducer';
 
 @Component({
   selector: 'app-ingreso-egreso',
@@ -23,7 +24,7 @@ export class IngresoEgresoComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private ingresoEgresoService: IngresoEgresoService,
-    private store: Store<AppState>,
+    private store: Store<IngresoEgresoAppState>,
   ) { }
 
   ngOnInit() {
