@@ -1,6 +1,6 @@
 # Curso De REDUX Con NGRX
 
-Material realizado en el curso de "REDUX con NGRX" de [Udemy]()
+Material realizado en el curso de "REDUX con NGRX" de [Udemy](https://www.udemy.com/certificate/UC-4f2e8538-5bb2-4c3e-836c-899ae08a0fdf/)
 
 ## Deploys
 
@@ -26,5 +26,5 @@ Material realizado en el curso de "REDUX con NGRX" de [Udemy]()
 
 ## Certificación 🎓
 
-Aún me encuentro realizando el curso.
+![Certificación](https://github.com/JuamBer/Udemy-Redux-Angular-NGRX/blob/master/img-licencia/ngrx.jpg)
 
