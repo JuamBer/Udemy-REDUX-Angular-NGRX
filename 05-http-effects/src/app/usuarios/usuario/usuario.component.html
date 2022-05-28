@@ -1,1 +1,32 @@
-<p>usuario works!</p>
+<div class="alert alert-info text-center" role="alert" *ngIf="loading">
+  <h4 class="alert-heading">Cargando...</h4>
+  <p>
+    <i class="fa fa-sync fa-spin fa-2x"></i>
+  </p>
+  <p class="mb-0"></p>
+</div>
+<div class="alert alert-danger text-center" role="alert" *ngIf="error">
+  <h4 class="alert-heading">Error</h4>
+  <pre>
+    {{
+      error | json
+    }}
+  </pre>
+  <p class="mb-0"></p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="!loading && usuario">
+  <div class="col">
+    <div class="card h-100">
+      <img [src]="usuario.avatar" class="card-img-top" [alt]="usuario.first_name">
+      <div class="card-body">
+        <h5 class="card-title">{{usuario.first_name}} {{usuario.last_name}}</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
+        </p>
+        <p class="card-text">
+          ID: {{usuario.id}}<br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
